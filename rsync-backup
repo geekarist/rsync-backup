@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SRC=$1
+DST=$2
+EXCLUDE=$3
+
+test -z "$1"||test -z "$2"||test -z "$3" && { echo 'Usage: rsync-backup <SOURCE> <DESTINATION> <EXCLUDE_FILE>' ; exit 1 ; }
+
+echo sudo rsync --archive \
+           --delete \
+           --delete-excluded \
+           --exclude-from=$EXCLUDE \
+           --hard-links \
+           --one-file-system \
+           --sparse \
+           --verbose \
+           --xattrs \
+           "$SRC" "$DST"
